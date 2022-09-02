@@ -3,7 +3,9 @@
 body {
   font-family: "Roboto", sans-serif;
 }
-
+p {
+  color: #949494;
+}
 ul > li > a {
   text-decoration: none;
   color: #858585;
