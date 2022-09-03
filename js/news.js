@@ -16,10 +16,10 @@ const displayCategories = (categories) => {
 };
 
 const loadNews = async (id) => {
-  const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
+  const url = `https://openapi.programming-hero.com/api/news/category/01`;
   const res = await fetch(url);
   const data = await res.json();
-  console.log(data.data);
+  displayNews(data.data);
 };
 const displayNews = async (categories) => {
   const newsContainer = document.getElementById("news_container");
@@ -59,7 +59,7 @@ const displayNews = async (categories) => {
                     <h4 class="fw-bold ">${category.total_view}</h4>
                   </div>
               
-                  <div>
+                  <div onclick="loadNewsDetails('${category._id}')">
                     <i class="fa-solid fa-arrow-right fs-4 pe-2 text-primary"></i>
                   </div>
                 </div>
@@ -69,6 +69,27 @@ const displayNews = async (categories) => {
         </div>`;
     newsContainer.appendChild(newsDiv);
   }
+};
+const loadNewsDetails = async (id) => {
+  const url = `https://openapi.programming-hero.com/api/news/${id}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  displayNewsDetails(data.data);
+};
+const displayNewsDetails = (category) => {
+  const modalTitle = document.getElementById("newsDetailModalLabel");
+  modalTitle.innerText = category.name;
+  const newsDetails = document.getElementById("news-details");
+  newsDetails.innerHTML = `
+    <img
+    src="${category.thumbnail_url}"
+    class="img-fluid rounded-start p-3"
+    alt="..."
+    />
+      <h5 class="card-title fs-3 fw-bold">${category.title}</h5>
+      <p class="card-text fw-semibold">
+        ${category.details}</p>
+    `;
 };
 loadNews();
 loadCategories();
