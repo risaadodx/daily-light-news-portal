@@ -11,9 +11,3 @@ ul > li > a {
   color: #858585;
   font-size: 18px;
 }
-ul > li {
-  list-style: none;
-}
-ul {
-  float: left;
-}
